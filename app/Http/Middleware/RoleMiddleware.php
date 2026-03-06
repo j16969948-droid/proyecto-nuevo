@@ -10,7 +10,7 @@ class RoleMiddleware
 {
     public function handle(Request $request, Closure $next, $role)
     {
-        $user = Session::get('user');
+        $user = authUser();
 
         if (!$user) {
             return redirect('/login');

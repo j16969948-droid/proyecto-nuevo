@@ -2,24 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     public function showLogin()
     {
-        // Si ya está logueado lo redirigimos a su panel
         if (Session::has('user')) {
-
-            $user = Session::get('user');
-
-            if ($user->rol == 'cliente') return redirect('/cliente');
-            if ($user->rol == 'revendedor') return redirect('/revendedor');
-            if ($user->rol == 'admin') return redirect('/admin');
-            if ($user->rol == 'superadmin') return redirect('/superadmin');
+            return $this->redirectByRole(authUser()->rol);
         }
 
         return view('auth.login');
@@ -27,7 +20,6 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // Si ya está logueado no permitimos volver a loguearse
         if (Session::has('user')) {
             return redirect('/');
         }
@@ -39,26 +31,31 @@ class AuthController extends Controller
 
         $user = DB::table('usuarios')
             ->where('telefono', $request->telefono)
-            ->where('password', $request->password)
             ->first();
 
-        if (!$user) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return back()->with('error', 'Credenciales incorrectas');
         }
 
         Session::put('user', $user);
 
-        if ($user->rol == 'cliente') return redirect('/cliente');
-        if ($user->rol == 'revendedor') return redirect('/revendedor');
-        if ($user->rol == 'admin') return redirect('/admin');
-        if ($user->rol == 'superadmin') return redirect('/superadmin');
-
-        return redirect('/');
+        return $this->redirectByRole($user->rol);
     }
 
     public function logout()
     {
         Session::forget('user');
         return redirect('/');
+    }
+
+    private function redirectByRole($rol)
+    {
+        return match ($rol) {
+            'cliente' => redirect('/cliente'),
+            'revendedor' => redirect('/revendedor'),
+            'admin' => redirect('/admin'),
+            'superadmin' => redirect('/superadmin'),
+            default => redirect('/')
+        };
     }
 }
