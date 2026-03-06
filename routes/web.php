@@ -1,27 +1,43 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ServiciosController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('public.servicios');
-});
+Route::get('/', [ServiciosController::class , 'index']);
 
-/* LOGIN */
+/* AUTENTICACIÓN */
 
 Route::get('/login', [AuthController::class , 'showLogin']);
 Route::post('/login', [AuthController::class , 'login']);
 Route::get('/logout', [AuthController::class , 'logout']);
 
-/* DASHBOARDS */
+/* REDIRECCIÓN GENERAL DE DASHBOARD */
 
-Route::view('/cliente', 'cliente.dashboard')
-    ->middleware(['auth.session', 'role:cliente']);
+Route::get('/dashboard', function () {
+//
+})->middleware(['auth.session', 'redirect.role']);
 
-Route::view('/revendedor', 'revendedor.dashboard')
-    ->middleware(['auth.session', 'role:revendedor']);
+/* RUTAS CLIENTE */
 
-Route::view('/admin', 'admin.dashboard')
-    ->middleware(['auth.session', 'role:admin']);
+Route::middleware(['auth.session', 'role:cliente'])->prefix('cliente')->group(function () {
+    Route::view('/', 'cliente.dashboard');
+});
 
-Route::view('/superadmin', 'superadmin.dashboard')
-    ->middleware(['auth.session', 'role:superadmin']);
+/* RUTAS REVENDEDOR */
+
+Route::middleware(['auth.session', 'role:revendedor'])->prefix('revendedor')->group(function () {
+    Route::view('/', 'revendedor.dashboard');
+});
+
+/* RUTAS ADMIN */
+
+Route::middleware(['auth.session', 'role:admin'])->prefix('admin')->group(function () {
+    Route::view('/', 'admin.dashboard');
+});
+
+/* RUTAS SUPERADMIN */
+
+Route::middleware(['auth.session', 'role:superadmin'])->prefix('superadmin')->group(function () {
+    Route::view('/', 'superadmin.dashboard');
+});

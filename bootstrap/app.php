@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
         'auth.session' => \App\Http\Middleware\AuthMiddleware::class,
         'role'=> \App\Http\Middleware\RoleMiddleware::class,
+        'redirect.role' => \App\Http\Middleware\RedirectByRole::class,
     ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
