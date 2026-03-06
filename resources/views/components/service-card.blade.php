@@ -27,12 +27,13 @@ ${{ $servicio->precio_publico }}
 
 </div>
 
-<a href="/servicio/{{ $servicio->id }}"
+<button
+onclick="addToCart({{ $servicio->id }}, '{{ $servicio->nombre }}', {{ $servicio->precio_publico }})"
 class="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg text-sm">
 
-Comprar
+Agregar
 
-</a>
+</button>
 
 </div>
 

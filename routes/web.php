@@ -6,37 +6,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ServiciosController::class , 'index']);
 
-/* AUTENTICACIÓN */
-
 Route::get('/login', [AuthController::class , 'showLogin']);
 Route::post('/login', [AuthController::class , 'login']);
 Route::get('/logout', [AuthController::class , 'logout']);
 
-/* REDIRECCIÓN GENERAL DE DASHBOARD */
 
 Route::get('/dashboard', function () {
 //
 })->middleware(['auth.session', 'redirect.role']);
 
-/* RUTAS CLIENTE */
-
 Route::middleware(['auth.session', 'role:cliente'])->prefix('cliente')->group(function () {
     Route::view('/', 'cliente.dashboard');
 });
-
-/* RUTAS REVENDEDOR */
 
 Route::middleware(['auth.session', 'role:revendedor'])->prefix('revendedor')->group(function () {
     Route::view('/', 'revendedor.dashboard');
 });
 
-/* RUTAS ADMIN */
-
 Route::middleware(['auth.session', 'role:admin'])->prefix('admin')->group(function () {
     Route::view('/', 'admin.dashboard');
 });
-
-/* RUTAS SUPERADMIN */
 
 Route::middleware(['auth.session', 'role:superadmin'])->prefix('superadmin')->group(function () {
     Route::view('/', 'superadmin.dashboard');

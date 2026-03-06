@@ -8,11 +8,10 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @vite('resources/css/app.css')
-
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-950 text-white">
+<body class="bg-gray-950 text-white pb-40">
 
 @include('components.navbar-public')
 
