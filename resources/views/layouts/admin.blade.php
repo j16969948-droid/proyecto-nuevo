@@ -1,19 +1,17 @@
 @extends('layouts.app')
 
 @section('body')
+    @include('components.navbar')
 
-@include('components.navbar')
+    <div class="layout">
 
-<div class="layout">
+        @include('components.sidebar-admin')
 
-    @include('components.sidebar-admin')
+        <main class="content">
 
-    <main class="content">
+            @yield('content')
 
-        @yield('content')
+        </main>
 
-    </main>
-
-</div>
-
+    </div>
 @endsection

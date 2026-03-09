@@ -126,41 +126,41 @@ function renderCart() {
 
         div.innerHTML = `
 
-<div class="flex flex-col">
+        <div class="flex flex-col">
 
-<div class="font-semibold text-gray-800 text-sm">
-${item.nombre}
-</div>
+        <div class="font-semibold text-gray-800 text-sm">
+        ${item.nombre}
+        </div>
 
-<div class="text-xs text-gray-400">
-Streaming
-</div>
+        <div class="text-xs text-gray-400">
+        Streaming
+        </div>
 
-</div>
+        </div>
 
-<div class="flex items-center gap-3 bg-gray-100 px-3 py-1 rounded-lg">
+        <div class="flex items-center gap-3 bg-gray-100 px-3 py-1 rounded-lg">
 
-<button onclick="decreaseQty(${item.id})"
-class="w-7 h-7 flex items-center justify-center rounded-md bg-white border hover:bg-gray-200 transition font-bold">
--
-</button>
+        <button onclick="decreaseQty(${item.id})"
+        class="w-7 h-7 flex items-center justify-center rounded-md bg-white border hover:bg-gray-200 transition font-bold">
+        -
+        </button>
 
-<span class="w-6 text-center font-semibold text-gray-700">
-${item.qty}
-</span>
+        <span class="w-6 text-center font-semibold text-gray-700">
+        ${item.qty}
+        </span>
 
-<button onclick="increaseQty(${item.id})"
-class="w-7 h-7 flex items-center justify-center rounded-md bg-white border hover:bg-gray-200 transition font-bold">
-+
-</button>
+        <button onclick="increaseQty(${item.id})"
+        class="w-7 h-7 flex items-center justify-center rounded-md bg-white border hover:bg-gray-200 transition font-bold">
+        +
+        </button>
 
-</div>
+        </div>
 
-<div class="font-bold text-indigo-600 text-sm">
-$${subtotal.toLocaleString()}
-</div>
+        <div class="font-bold text-indigo-600 text-sm">
+        $${subtotal.toLocaleString()}
+        </div>
 
-`;
+        `;
 
         cartItems.appendChild(div);
 

@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>@yield('title','Lasso')</title>
+    <title>@yield('title', 'Lasso')</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,13 +13,13 @@
 
 <body class="bg-gray-950 text-white pb-40">
 
-@include('components.navbar-public')
+    @include('components.navbar-public')
 
-<main>
+    <main>
 
-@yield('content')
+        @yield('content')
 
-</main>
+    </main>
 
 </body>
 
