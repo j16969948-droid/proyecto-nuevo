@@ -2,60 +2,73 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
-{
-    public function showLogin()
-    {
-        if (Session::has('user')) {
-            return $this->redirectByRole(authUser()->rol);
-        }
+{   
 
-        return view('auth.login');
+
+    public function register(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'password' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
+        
+        $user = User::create([
+            'nombre' => $request->nombre,
+            'telefono' => $request->telefono,
+            'password' => Hash::make($request->password)
+        ]);
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'data'=> $user,
+            'access_token' => $token,
+            'token_type' => 'Bearer'
+        ]);
+        
     }
+
 
     public function login(Request $request)
     {
-        if (Session::has('user')) {
-            return redirect('/');
+
+        if (!Auth::attempt($request->only('telefono', 'password'))) {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
         }
 
-        $request->validate([
-            'telefono' => 'required',
-            'password' => 'required'
+        $user = User::where('telefono',$request['telefono'])->firstOrFail();
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'token' => $token,
+            'user' => $user
         ]);
-
-        $user = DB::table('usuarios')
-            ->where('telefono', $request->telefono)
-            ->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return back()->with('error', 'Credenciales incorrectas');
-        }
-
-        Session::put('user', $user);
-
-        return $this->redirectByRole($user->rol);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Session::forget('user');
-        return redirect('/');
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'message' => 'Logout exitoso'
+        ]);
     }
 
-    private function redirectByRole($rol)
-    {
-        return match ($rol) {
-            'cliente' => redirect('/cliente'),
-            'revendedor' => redirect('/revendedor'),
-            'admin' => redirect('/admin'),
-            'superadmin' => redirect('/superadmin'),
-            default => redirect('/')
-        };
-    }
+    
 }
