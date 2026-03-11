@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('movimientos_saldo', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('usuario_id')->nullable()->index('usuario_id');
+            $table->unsignedBigInteger('usuario_id')->nullable()->index('usuario_id');
             $table->enum('tipo', ['credito', 'debito'])->nullable();
             $table->decimal('monto', 10)->nullable();
             $table->string('descripcion')->nullable();

@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pedidos', function (Blueprint $table) {
-            $table->foreign(['usuario_id'], 'fk_pedidos_usuario')->references(['id'])->on('usuarios')->onDelete('restrict');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pedidos', function (Blueprint $table) {
-            $table->dropForeign('fk_pedidos_usuario');
-        });
+        Schema::dropIfExists('roles');
     }
 };

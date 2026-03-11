@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('carrito', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('usuario_id')->nullable()->index('idx_carrito_usuario');
+            $table->unsignedBigInteger('usuario_id')->nullable()->index('idx_carrito_usuario');
             $table->integer('producto_id')->nullable()->index('fk_carrito_producto');
             $table->integer('cantidad')->nullable()->default(1);
             $table->timestamp('fecha')->nullable()->useCurrent();
