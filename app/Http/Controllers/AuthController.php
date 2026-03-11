@@ -53,12 +53,21 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = User::where('telefono',$request['telefono'])->firstOrFail();
+        $user = User::with(['roles:id,nombre'])->where('telefono',$request['telefono'])->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
+
+        $role = $user->roles->map(function ($role) {
+            return [
+                'id' => $role->id,
+                'nombre' => $role->nombre
+            ];
+        });
+
+        $user->roles = $role;
 
         return response()->json([
             'token' => $token,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
