@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SystemController;
+
 use App\Http\Controllers\CatalogoServiciosController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,7 +23,17 @@ Route::prefix('v1')->group(function () {
         
         
     Route::middleware(['auth:sanctum'])->group(function () {
-        Route::get('/logout', [AuthController::class, 'logout']);       
+        Route::get('/sidebar', [SystemController::class, 'sideBarXrole']);
+        Route::get('/logout', [AuthController::class, 'logout']);
+        
+        
+        Route::prefix('role')->group(function () {
+            Route::get('/list', [RoleController::class, 'index']);
+        });
+
+        Route::prefix('usuario')->group(function () {
+            Route::get('/list', [UsuarioController::class, 'index']);
+        });
     });
 
     
