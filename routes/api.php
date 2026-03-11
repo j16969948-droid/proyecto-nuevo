@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PagoEmailController;
 use App\Http\Controllers\SystemController;
 
 use App\Http\Controllers\CatalogoServiciosController;
@@ -25,9 +26,10 @@ Route::prefix('v1')->group(function () {
         
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/sidebar', [SystemController::class, 'sideBarXrole']);
-        Route::get('/pagos/entrantes', [PagoEntranteController::class, 'index']);
         Route::get('/logout', [AuthController::class, 'logout']);
         
+        Route::get('/pagos/entrantes', [PagoEntranteController::class, 'index']);
+        Route::get('/pagos/email', [PagoEmailController::class, 'index']);
         
         Route::prefix('role')->group(function () {
             Route::get('/list', [RoleController::class, 'index']);
