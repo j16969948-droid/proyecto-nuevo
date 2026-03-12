@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PagoEmailController;
+use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\SystemController;
 
-use App\Http\Controllers\CatalogoServiciosController;
 use App\Http\Controllers\PagoEntranteController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
@@ -41,7 +41,7 @@ Route::prefix('v1')->group(function () {
     });
 
     
-    Route::get('/catalogoServicios', [CatalogoServiciosController::class, 'index']);
+    Route::get('/servicios', [ServicioController::class, 'index']);
     
 
 });
