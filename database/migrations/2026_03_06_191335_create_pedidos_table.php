@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('usuario_id')->nullable()->index('idx_pedidos_usuario');
+            $table->unsignedBigInteger('usuario_id')->nullable()->index('idx_pedidos_usuario');
             $table->decimal('total', 10)->default(0);
             $table->enum('estado', ['pendiente', 'pagado', 'entregado', 'cancelado'])->nullable()->default('pendiente');
             $table->timestamp('fecha')->nullable()->useCurrent()->index('idx_pedidos_fecha');

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('carrito', function (Blueprint $table) {
             $table->foreign(['producto_id'], 'fk_carrito_producto')->references(['id'])->on('productos')->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign(['usuario_id'], 'fk_carrito_usuario')->references(['id'])->on('usuarios')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign(['usuario_id'], 'fk_carrito_usuario')->references(['id'])->on('usuarios')->onDelete('cascade');
         });
     }
 
