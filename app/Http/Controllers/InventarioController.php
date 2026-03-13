@@ -9,9 +9,8 @@ class InventarioController extends Controller
 {
     public function index()
     {
-        return Inventario::all();
+        return Inventario::with('servicio')->get();
     }
-
 
     public function store(Request $request)
     {
@@ -26,12 +25,12 @@ class InventarioController extends Controller
             'telefono_asignado' => 'nullable|string|max:20',
             'cliente_id_asignado' => 'nullable|string|max:50',
             'estado' => 'in:disponible,asignado,vencido',
-            'texto' => 'required|string|max:250'
         ]);
 
         $inventario = Inventario::create($data);
+        $inventario->load('servicio');
 
-        return response()->json($inventario,201);
+        return response()->json($inventario, 201);
     }
 
     public function update(Request $request, $id)
@@ -49,14 +48,13 @@ class InventarioController extends Controller
             'telefono_asignado' => 'nullable|string|max:20',
             'cliente_id_asignado' => 'nullable|string|max:50',
             'estado' => 'in:disponible,asignado,vencido',
-            'texto' => 'string|max:250'
         ]);
 
         $inventario->update($data);
+        $inventario->load('servicio');
 
         return response()->json($inventario);
     }
-
 
     public function destroy($id)
     {
@@ -67,6 +65,4 @@ class InventarioController extends Controller
             'message' => 'Inventario eliminado'
         ]);
     }
-
-
 }
