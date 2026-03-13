@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ServicioDeleteRequest;
 use App\Http\Requests\ServicioStoreRequest;
 use App\Http\Requests\ServicioUpdateRequest;
 use App\Services\ServicioService;
@@ -40,7 +41,7 @@ class ServicioController extends Controller
     }
 
     // Soft delete de un servicio
-    public function destroy($id)
+    public function destroy(ServicioDeleteRequest $request, $id)
     {
         return $this->service->delete($id);
     }
