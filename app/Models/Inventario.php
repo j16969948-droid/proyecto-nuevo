@@ -22,4 +22,9 @@ class Inventario extends Model
         'estado',
         'texto'
     ];
+
+    public function servicio()
+    {
+        return $this->belongsTo(Servicio::class, 'servicio_id');
+    }
 }
