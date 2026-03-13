@@ -13,16 +13,20 @@ return new class extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 100);
-            $table->string('slug', 100);
-            $table->decimal('precio_usuario', 10, 2)->default(0.00);
-            $table->decimal('precio_revendedor', 10, 2)->default(0.00);
-            $table->boolean('estado')->default(1);
-            $table->longText('imagen');
-            $table->string('proveedor', 100);
-            $table->string('telefono_proveedor', 100);
+            $table->string('nombre',100);
+            $table->string('slug',100);
 
-            $table->timestamps();
+            $table->decimal('precio_usuario',10,2)->default(0.00);
+            $table->decimal('precio_revendedor',10,2)->default(0.00);
+
+            $table->boolean('estado')->default(true);
+
+            $table->string('imagen',100);
+
+            $table->string('proveedor',100);
+            $table->string('telefono_proveedor',100);
+
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

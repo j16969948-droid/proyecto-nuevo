@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('inventario', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('servicio_id');
+            $table->foreignId('servicio_id')
+                ->constrained('servicios')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->date('fecha_compra')->nullable();
             $table->string('correo',150);
             $table->string('clave',150);
@@ -22,17 +25,8 @@ return new class extends Migration
             $table->date('fecha_vencimiento')->nullable();
             $table->string('telefono_asignado',20)->nullable();
             $table->string('cliente_id_asignado',50)->nullable();
-            $table->enum('estado', ['disponible','asignado','vencido'])
-                  ->default('disponible');
-
-            $table->string('texto',250);
-
-            // FOREIGN KEY
-            $table->foreign('servicio_id')
-                  ->references('id')
-                  ->on('servicios')
-                  ->onDelete('cascade');
-            $table->timestamps();
+            $table->string('estado')->default('disponible');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
