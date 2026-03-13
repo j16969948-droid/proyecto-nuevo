@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\PagoEmailController;
+use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\SystemController;
 
-use App\Http\Controllers\CatalogoServiciosController;
 use App\Http\Controllers\PagoEntranteController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
@@ -38,10 +39,17 @@ Route::prefix('v1')->group(function () {
         Route::prefix('usuario')->group(function () {
             Route::get('/list', [UsuarioController::class, 'index']);
         });
+
+        Route::prefix('inventario')->group(function () {
+            Route::get('', [InventarioController::class, 'index']);
+            Route::post('', [InventarioController::class, 'store']);
+            Route::put('/{id}', [InventarioController::class, 'update']);
+            Route::delete('/{id}', [InventarioController::class, 'destroy']);
+        });
     });
 
     
-    Route::get('/catalogoServicios', [CatalogoServiciosController::class, 'index']);
+    Route::get('/servicios', [ServicioController::class, 'index']);
     
 
 });
