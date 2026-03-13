@@ -14,24 +14,24 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('v1')->group(function () {
-    
-    Route::get('/hola', function(){
+
+    Route::get('/hola', function () {
         return 'Hello World';
     });
-    
+
     Route::prefix('auth')->group(function () {
         Route::post('/login', [AuthController::class, 'login']);
         Route::post('/register', [AuthController::class, 'register']);
     });
-        
-        
+
+
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/sidebar', [SystemController::class, 'sideBarXrole']);
         Route::get('/logout', [AuthController::class, 'logout']);
-        
+
         Route::get('/pagos/entrantes', [PagoEntranteController::class, 'index']);
         Route::get('/pagos/email', [PagoEmailController::class, 'index']);
-        
+
         Route::prefix('role')->group(function () {
             Route::get('/list', [RoleController::class, 'index']);
         });
@@ -48,8 +48,11 @@ Route::prefix('v1')->group(function () {
         });
     });
 
-    
-    Route::get('/servicios', [ServicioController::class, 'index']);
-    
-
+    Route::prefix('servicios')->group(function () {
+        Route::get('/', [ServicioController::class, 'index']);
+        Route::get('/{id}', [ServicioController::class, 'show']);
+        Route::post('/', [ServicioController::class, 'store']);
+        Route::patch('/{id}', [ServicioController::class, 'update']);
+        Route::delete('/{id}', [ServicioController::class, 'destroy']);
+    });
 });
