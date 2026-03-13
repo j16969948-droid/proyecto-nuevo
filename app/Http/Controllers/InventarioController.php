@@ -25,7 +25,6 @@ class InventarioController extends Controller
             'telefono_asignado' => 'nullable|string|max:20',
             'cliente_id_asignado' => 'nullable|string|max:50',
             'estado' => 'in:disponible,asignado,vencido',
-            'texto' => 'required|string|max:250'
         ]);
 
         $inventario = Inventario::create($data);
@@ -49,7 +48,6 @@ class InventarioController extends Controller
             'telefono_asignado' => 'nullable|string|max:20',
             'cliente_id_asignado' => 'nullable|string|max:50',
             'estado' => 'in:disponible,asignado,vencido',
-            'texto' => 'string|max:250'
         ]);
 
         $inventario->update($data);

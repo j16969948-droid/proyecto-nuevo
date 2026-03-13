@@ -2188,6 +2188,7 @@
         },
         {
             "name": "nesbot/carbon",
+<<<<<<< HEAD
             "version": "3.11.2",
             "source": {
                 "type": "git",
@@ -2198,6 +2199,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/57d696f4ec76d8560cc13b9d16ec01afc4379d04",
                 "reference": "57d696f4ec76d8560cc13b9d16ec01afc4379d04",
+=======
+            "version": "3.11.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CarbonPHP/carbon.git",
+                "reference": "6a7e652845bb018c668220c2a545aded8594fbbf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/6a7e652845bb018c668220c2a545aded8594fbbf",
+                "reference": "6a7e652845bb018c668220c2a545aded8594fbbf",
+>>>>>>> 5682073e8612830527de0473366fd02ebffa777e
                 "shasum": ""
             },
             "require": {
@@ -2289,7 +2302,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2026-03-10T21:43:48+00:00"
+=======
+            "time": "2026-03-11T17:23:39+00:00"
+>>>>>>> 5682073e8612830527de0473366fd02ebffa777e
         },
         {
             "name": "nette/schema",
@@ -6419,6 +6436,7 @@
         },
         {
             "name": "laravel/pint",
+<<<<<<< HEAD
             "version": "v1.28.0",
             "source": {
                 "type": "git",
@@ -6429,6 +6447,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/pint/zipball/1feae84bf9c1649d99ba8f7b8193bf0f09f04cc9",
                 "reference": "1feae84bf9c1649d99ba8f7b8193bf0f09f04cc9",
+=======
+            "version": "v1.29.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/pint.git",
+                "reference": "bdec963f53172c5e36330f3a400604c69bf02d39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/bdec963f53172c5e36330f3a400604c69bf02d39",
+                "reference": "bdec963f53172c5e36330f3a400604c69bf02d39",
+>>>>>>> 5682073e8612830527de0473366fd02ebffa777e
                 "shasum": ""
             },
             "require": {
@@ -6445,8 +6475,13 @@
                 "laravel-zero/framework": "^12.0.5",
                 "mockery/mockery": "^1.6.12",
                 "nunomaduro/termwind": "^2.4.0",
+<<<<<<< HEAD
                 "pestphp/pest": "^3.8.5",
                 "shipfastlabs/agent-detector": "^1.0.2"
+=======
+                "pestphp/pest": "^3.8.6",
+                "shipfastlabs/agent-detector": "^1.1.0"
+>>>>>>> 5682073e8612830527de0473366fd02ebffa777e
             },
             "bin": [
                 "builds/pint"
@@ -6483,7 +6518,11 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
+<<<<<<< HEAD
             "time": "2026-03-10T20:37:18+00:00"
+=======
+            "time": "2026-03-12T15:51:39+00:00"
+>>>>>>> 5682073e8612830527de0473366fd02ebffa777e
         },
         {
             "name": "laravel/sail",
@@ -8529,12 +8568,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
