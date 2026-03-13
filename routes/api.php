@@ -24,12 +24,16 @@ Route::prefix('v1')->group(function () {
         Route::post('/register', [AuthController::class, 'register']);
     });
 
+    // Public services routes
+    Route::prefix('servicios')->group(function () {
+        Route::get('/', [ServicioController::class, 'index']);
+        Route::get('/{id}', [ServicioController::class, 'show']);
+        });
 
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/sidebar', [SystemController::class, 'sideBarXrole']);
         Route::get('/logout', [AuthController::class, 'logout']);
 
-        Route::get('/pagos/entrantes', [PagoEntranteController::class, 'index']);
         Route::get('/pagos/email', [PagoEmailController::class, 'index']);
 
         Route::prefix('role')->group(function () {
@@ -46,13 +50,18 @@ Route::prefix('v1')->group(function () {
             Route::put('/{id}', [InventarioController::class, 'update']);
             Route::delete('/{id}', [InventarioController::class, 'destroy']);
         });
-    });
 
-    Route::prefix('servicios')->group(function () {
-        Route::get('/', [ServicioController::class, 'index']);
-        Route::get('/{id}', [ServicioController::class, 'show']);
-        Route::post('/', [ServicioController::class, 'store']);
-        Route::patch('/{id}', [ServicioController::class, 'update']);
-        Route::delete('/{id}', [ServicioController::class, 'destroy']);
+        Route::prefix('servicios')->group(function () {
+            Route::post('/', [ServicioController::class, 'store']);
+            Route::patch('/{id}', [ServicioController::class, 'update']);
+            Route::delete('/{id}', [ServicioController::class, 'destroy']);
+        });
+
+
+        Route::prefix('pagos-entrantes')->group(function () {
+            Route::get('/', [PagoEntranteController::class, 'index']);
+            Route::get('/{id}', [PagoEntranteController::class, 'show']);
+            Route::post('/', [PagoEntranteController::class, 'store']);
+        });
     });
 });

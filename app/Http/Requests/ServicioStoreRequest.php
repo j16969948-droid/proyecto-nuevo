@@ -12,7 +12,15 @@ class ServicioStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $user = $this->user();
+
+        if (!$user) {
+            return false; // no autenticado
+        }
+
+        $rolesPermitidos = ['Admin', 'Super Admin'];
+
+        return $user->roles()->whereIn('nombre', $rolesPermitidos)->exists();
     }
 
     /**
