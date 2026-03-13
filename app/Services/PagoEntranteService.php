@@ -6,6 +6,13 @@ use App\Models\PagoEntrante;
 
 class PagoEntranteService
 {
+    protected $paymentValidationService;
+
+    public function __construct(PaymentValidationService $paymentValidationService)
+    {
+        $this->paymentValidationService = $paymentValidationService;
+    }
+
     public function getAll()
     {
         return PagoEntrante::all();
@@ -18,6 +25,8 @@ class PagoEntranteService
 
     public function create(array $data)
     {
-        return PagoEntrante::create($data);
+        $pagoEntrante = PagoEntrante::create($data);
+
+        return $this->paymentValidationService->validate($pagoEntrante);
     }
 }

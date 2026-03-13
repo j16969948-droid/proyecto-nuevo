@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class PagoEmail extends Model
 {
     protected $table = 'pagos_email';
+
+    public $timestamps = false;
 }
