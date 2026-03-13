@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class PagoEmail extends Model
 {
-    protected $table = 'pagos_mail';
+    protected $table = 'pagos_email';
 }
