@@ -29,4 +29,15 @@ class PagoEntranteService
 
         return $this->paymentValidationService->validate($pagoEntrante);
     }
+
+    public function validateManual($id)
+    {
+        $pago = PagoEntrante::findOrFail($id);
+        $pago->update([
+            'estado' => 'aprobado',
+            'origen' => 'manual'
+        ]);
+
+        return $pago;
+    }
 }

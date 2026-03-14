@@ -32,7 +32,7 @@ class PaymentValidationService
             $diferenciaMinutos = $creadoEnEmail->diffInMinutes($creadoEnEntrante);
 
             // Update PagoEntrante
-            $pagoEntrante->estado = 'validado';
+            $pagoEntrante->estado = 'Aprobado';
             $pagoEntrante->pago_email_id = $pagoEmail->id;
             $pagoEntrante->vinculado_en = $now;
             $pagoEntrante->diferencia_minutos = $diferenciaMinutos;

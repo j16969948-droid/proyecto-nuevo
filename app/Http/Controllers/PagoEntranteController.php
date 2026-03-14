@@ -35,4 +35,16 @@ class PagoEntranteController extends Controller
         $pago = $this->service->create($request->validated());
         return response()->json($pago, 201);
     }
+
+    // PATCH /pagos-entrantes/{id}
+    public function update($id): JsonResponse
+    {
+        $pago = $this->service->validateManual($id);
+        return response()->json([
+            'ok' => true,
+            'mensaje' => 'Pago actualizado y validado',
+            'pago' => $pago
+        ]);
+    }
+
 }

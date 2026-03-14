@@ -62,6 +62,7 @@ Route::prefix('v1')->group(function () {
             Route::get('/', [PagoEntranteController::class, 'index']);
             Route::get('/{id}', [PagoEntranteController::class, 'show']);
             Route::post('/', [PagoEntranteController::class, 'store']);
+            Route::patch('/{id}', [PagoEntranteController::class, 'update']);
         });
     });
 });
