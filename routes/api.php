@@ -57,12 +57,17 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', [ServicioController::class, 'destroy']);
         });
 
-
         Route::prefix('pagos-entrantes')->group(function () {
             Route::get('/', [PagoEntranteController::class, 'index']);
             Route::get('/{id}', [PagoEntranteController::class, 'show']);
             Route::post('/', [PagoEntranteController::class, 'store']);
             Route::patch('/{id}', [PagoEntranteController::class, 'update']);
+        });
+
+        Route::prefix('pagos-email')->group(function () {
+            Route::get('/', [PagoEmailController::class, 'index']);
+            Route::get('/{id}', [PagoEmailController::class, 'show']);
+            Route::post('/', [PagoEmailController::class, 'store']);
         });
     });
 });
