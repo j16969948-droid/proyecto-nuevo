@@ -35,4 +35,9 @@ class Role extends Model
             'id_menu'
         );
     }
+
+    public function scopeNombre($query, $nombre)
+    {
+        return $query->where('nombre', $nombre);
+    }
 }
