@@ -8,9 +8,13 @@ class Role extends Model
 {
     protected $table = 'roles';
 
-    protected $fillable = ['nombre'];
+    protected $fillable = [
+        'nombre'
+    ];
 
-    protected $hidden = ['pivot'];
+    protected $hidden = [
+        'pivot'
+    ];
 
     public function usuarios()
     {
@@ -19,6 +23,16 @@ class Role extends Model
             'roles_usuarios',
             'id_rol',
             'id_usuario'
+        );
+    }
+
+    public function menus()
+    {
+        return $this->belongsToMany(
+            Menu::class,
+            'roles_menus',
+            'id_rol',
+            'id_menu'
         );
     }
 }
